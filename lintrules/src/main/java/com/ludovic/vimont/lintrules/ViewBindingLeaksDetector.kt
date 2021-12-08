@@ -5,6 +5,7 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
@@ -54,12 +55,15 @@ class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeSca
         findViewBindingFields(context, declaration).forEach { field: UField ->
             val onDestroyMethod: JvmMethod? = declaration.findMethodsByName(ON_DESTROY_VIEW_METHOD_NAME).firstOrNull()
             if (onDestroyMethod == null) {
-                report(context, declaration)
+                val message = "Don't forget to implements $ON_DESTROY_VIEW_METHOD_NAME inside a fragment " +
+                        "to avoid memory leaks while using ViewBinding."
+                report(context, declaration, message)
             } else {
                 UastFacade.getMethodBody(onDestroyMethod as PsiMethod)?.let { uExpression: UExpression ->
                     val regex = "${field.name}(.*)+=(.*)null".toRegex()
                     if (uExpression.asSourceString().contains(regex).not()) {
-                        report(context, declaration)
+                        val message = "You need to set the field: \"${field.name}\" to null to avoid memory leaks."
+                        report(context, declaration, message, context.getLocation(uExpression))
                     }
                 }
             }
@@ -82,12 +86,15 @@ class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeSca
         return fields
     }
 
-    private fun report(context: JavaContext, declaration: UClass, debug: String = "") {
+    private fun report(context: JavaContext,
+                       declaration: UClass,
+                       message: String = "Be careful about MemoryLeaks using ViewBinding inside a Fragment.",
+                       location: Location = context.getNameLocation(declaration)) {
         context.report(
             issue = ISSUE,
-            declaration,
-            context.getNameLocation(declaration),
-            message = "Be careful about MemoryLeaks using ViewBinding inside a Fragment. $debug"
+            scopeClass = declaration,
+            location = location,
+            message = message
         )
     }
 }
