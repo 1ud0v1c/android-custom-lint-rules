@@ -22,6 +22,7 @@ dependencies {
     compileOnly "com.android.tools.lint:lint-checks:30.0.3"
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.0"
 
+    testImplementation "com.android.tools.lint:lint:30.0.3"
     testImplementation "com.android.tools.lint:lint-tests:30.0.3"
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.assertj:assertj-core:3.9.0"
