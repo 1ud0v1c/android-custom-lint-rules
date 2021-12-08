@@ -2,9 +2,11 @@ package com.ludovic.vimont.lintrules
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.google.common.annotations.Beta
 import org.junit.Test
 import java.io.File
 
+@Beta
 class ViewBindingLeaksDetectorTest {
     companion object {
         private const val RESOURCE_FILE_PATH = "src/test/resources"

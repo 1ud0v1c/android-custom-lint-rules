@@ -19,6 +19,27 @@ import org.jetbrains.uast.UastFacade
 
 @Beta
 class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeScanner {
+    companion object {
+        private val BINDING_FIELD_NAME = "_binding"
+        private val ON_DESTROY_VIEW_METHOD_NAME = "onDestroyView"
+
+        val ISSUE: Issue = Issue.create(
+            id = "ViewBindingLeaksDetector",
+            briefDescription = "Be careful about MemoryLeaks using ViewBinding inside a Fragment",
+            explanation = """
+                You should be careful about Memory Leaks using ViewBinding inside Fragments.
+                Override the onDestroyView method and set your binding instance to null inside it.
+            """.trimIndent(),
+            category = Category.CUSTOM_LINT_CHECKS,
+            priority = 9,
+            severity = Severity.WARNING,
+            androidSpecific = true,
+            implementation = Implementation(
+                ViewBindingLeaksDetector::class.java,
+                Scope.JAVA_FILE_SCOPE
+            )
+        )
+    }
 
     override fun getApplicableUastTypes(): List<Class<out UElement>> = listOf(UClass::class.java)
 
@@ -27,23 +48,20 @@ class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeSca
     override fun visitClass(context: JavaContext, declaration: UClass) {
         super.visitClass(context, declaration)
 
-        val field: PsiField? = declaration.findFieldByName("_binding", true)
+        val field: PsiField? = declaration.findFieldByName(BINDING_FIELD_NAME, true)
         if (field != null) {
-            val onDestroyMethod: JvmMethod? = declaration.findMethodsByName("onDestroyView").firstOrNull()
+            val onDestroyMethod: JvmMethod? =
+                declaration.findMethodsByName(ON_DESTROY_VIEW_METHOD_NAME).firstOrNull()
             if (onDestroyMethod == null) {
-                context.report(
-                    issue = ISSUE,
-                    declaration,
-                    context.getNameLocation(declaration),
-                    message = "Be careful about MemoryLeaks using ViewBinding."
-                )
+                report(context, declaration)
             } else {
-                UastFacade.getMethodBody(onDestroyMethod as PsiMethod)?.let { uExpression: UExpression ->
-                    val regex = "${field.name}(.*)+=(.*)null".toRegex()
-                    if (uExpression.asSourceString().contains(regex).not()) {
-                        report(context, declaration)
+                UastFacade.getMethodBody(onDestroyMethod as PsiMethod)
+                    ?.let { uExpression: UExpression ->
+                        val regex = "${field.name}(.*)+=(.*)null".toRegex()
+                        if (uExpression.asSourceString().contains(regex).not()) {
+                            report(context, declaration)
+                        }
                     }
-                }
             }
         }
     }
@@ -53,28 +71,7 @@ class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeSca
             issue = ISSUE,
             declaration,
             context.getNameLocation(declaration),
-            message = "Be careful about MemoryLeaks using ViewBinding."
-        )
-    }
-
-    companion object {
-        private val IMPLEMENTATION = Implementation(
-            ViewBindingLeaksDetector::class.java,
-            Scope.JAVA_FILE_SCOPE
-        )
-
-        val ISSUE: Issue = Issue.create(
-            id = "ViewBindingLeaksDetector",
-            briefDescription = "Be careful about MemoryLeaks using ViewBindings",
-            explanation = """
-                You should be careful about Memory Leaks using ViewBinding inside Fragments.
-                Override the onDestroyView method and set your binding instance to null inside it.
-            """.trimIndent(),
-            category = Category.CUSTOM_LINT_CHECKS,
-            priority = 9,
-            severity = Severity.WARNING,
-            androidSpecific = true,
-            implementation = IMPLEMENTATION
+            message = "Be careful about MemoryLeaks using ViewBinding inside a Fragment."
         )
     }
 }

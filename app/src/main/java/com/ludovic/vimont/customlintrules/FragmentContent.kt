@@ -1,7 +1,6 @@
 package com.ludovic.vimont.customlintrules
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +18,6 @@ class FragmentContent: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentContentBinding.inflate(layoutInflater)
-
-        Log.e("Test", "Test my super lint rule")
-
         return binding.root
     }
 
