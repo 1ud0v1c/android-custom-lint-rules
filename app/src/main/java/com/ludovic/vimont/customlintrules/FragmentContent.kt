@@ -13,6 +13,7 @@ import com.ludovic.vimont.customlintrules.databinding.FragmentContentBinding
  * A good candidate for a lint :D !
  */
 class FragmentContent: Fragment() {
+    private val fortyTwo: Int = 42
     private var _binding: FragmentContentBinding? = null
     private val binding get() = _binding!!
 

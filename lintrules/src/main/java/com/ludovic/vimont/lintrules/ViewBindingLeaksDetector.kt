@@ -10,18 +10,21 @@ import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.google.common.annotations.Beta
 import com.intellij.lang.jvm.JvmMethod
-import com.intellij.psi.PsiField
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiClassType
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UExpression
+import org.jetbrains.uast.UField
 import org.jetbrains.uast.UastFacade
 
 @Beta
 class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeScanner {
     companion object {
-        private val BINDING_FIELD_NAME = "_binding"
-        private val ON_DESTROY_VIEW_METHOD_NAME = "onDestroyView"
+        private const val VIEW_BINDING_CLASS = "androidx.viewbinding.ViewBinding"
+        private const val FRAGMENT_CLASS = "androidx.fragment.app.Fragment"
+        private const val ON_DESTROY_VIEW_METHOD_NAME = "onDestroyView"
 
         val ISSUE: Issue = Issue.create(
             id = "ViewBindingLeaksDetector",
@@ -43,35 +46,48 @@ class ViewBindingLeaksDetector : Detector(), Detector.UastScanner, SourceCodeSca
 
     override fun getApplicableUastTypes(): List<Class<out UElement>> = listOf(UClass::class.java)
 
-    override fun applicableSuperClasses() = listOf("androidx.fragment.app.Fragment")
+    override fun applicableSuperClasses() = listOf(FRAGMENT_CLASS)
 
     override fun visitClass(context: JavaContext, declaration: UClass) {
         super.visitClass(context, declaration)
 
-        val field: PsiField? = declaration.findFieldByName(BINDING_FIELD_NAME, true)
-        if (field != null) {
-            val onDestroyMethod: JvmMethod? =
-                declaration.findMethodsByName(ON_DESTROY_VIEW_METHOD_NAME).firstOrNull()
+        findViewBindingFields(context, declaration).forEach { field: UField ->
+            val onDestroyMethod: JvmMethod? = declaration.findMethodsByName(ON_DESTROY_VIEW_METHOD_NAME).firstOrNull()
             if (onDestroyMethod == null) {
                 report(context, declaration)
             } else {
-                UastFacade.getMethodBody(onDestroyMethod as PsiMethod)
-                    ?.let { uExpression: UExpression ->
-                        val regex = "${field.name}(.*)+=(.*)null".toRegex()
-                        if (uExpression.asSourceString().contains(regex).not()) {
-                            report(context, declaration)
-                        }
+                UastFacade.getMethodBody(onDestroyMethod as PsiMethod)?.let { uExpression: UExpression ->
+                    val regex = "${field.name}(.*)+=(.*)null".toRegex()
+                    if (uExpression.asSourceString().contains(regex).not()) {
+                        report(context, declaration)
                     }
+                }
             }
         }
     }
 
-    private fun report(context: JavaContext, declaration: UClass) {
+    private fun findViewBindingFields(context: JavaContext, declaration: UClass): List<UField> {
+        val evaluator = context.evaluator
+        val fields = arrayListOf<UField>()
+        declaration.fields.forEach { field: UField ->
+            val type = field.type
+            if (type is PsiClassType) {
+                type.resolve()?.let { psiClass: PsiClass ->
+                    if (evaluator.implementsInterface(psiClass, VIEW_BINDING_CLASS)) {
+                        fields.add(field)
+                    }
+                }
+            }
+        }
+        return fields
+    }
+
+    private fun report(context: JavaContext, declaration: UClass, debug: String = "") {
         context.report(
             issue = ISSUE,
             declaration,
             context.getNameLocation(declaration),
-            message = "Be careful about MemoryLeaks using ViewBinding inside a Fragment."
+            message = "Be careful about MemoryLeaks using ViewBinding inside a Fragment. $debug"
         )
     }
 }

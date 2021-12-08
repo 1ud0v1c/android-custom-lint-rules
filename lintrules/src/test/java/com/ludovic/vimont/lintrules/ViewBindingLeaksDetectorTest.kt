@@ -12,9 +12,19 @@ class ViewBindingLeaksDetectorTest {
         private const val RESOURCE_FILE_PATH = "src/test/resources"
     }
 
+    private val viewBindingStub = kotlin("""
+        package androidx.viewbinding
+        class ViewBinding
+    """).indented()
+
     private val fragmentStub = kotlin("""
         package androidx.fragment.app
         class Fragment
+    """).indented()
+
+    private val myBindingStub = kotlin("""
+        package com.ludovic.vimont.customlintrules
+        abstract class MyBinding: androidx.viewbinding.ViewBinding
     """).indented()
 
     @Test
@@ -23,7 +33,7 @@ class ViewBindingLeaksDetectorTest {
         val fileContent = String(File("$RESOURCE_FILE_PATH/memory_leaks.txt").readBytes())
 
         // When
-        val testLintResult = lint().files(fragmentStub, kotlin(fileContent).indented())
+        val testLintResult = lint().files(fragmentStub, viewBindingStub, myBindingStub, kotlin(fileContent).indented())
             .issues(ViewBindingLeaksDetector.ISSUE)
             .allowCompilationErrors()
             .run()
@@ -38,7 +48,7 @@ class ViewBindingLeaksDetectorTest {
         val fileContent = String(File("$RESOURCE_FILE_PATH/no_memory_leaks.txt").readBytes())
 
         // When
-        val testLintResult = lint().files(fragmentStub, kotlin(fileContent).indented())
+        val testLintResult = lint().files(fragmentStub, viewBindingStub, myBindingStub, kotlin(fileContent).indented())
             .issues(ViewBindingLeaksDetector.ISSUE)
             .allowCompilationErrors()
             .run()
