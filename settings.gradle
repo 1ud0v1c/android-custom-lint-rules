@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CustomLintRules"
 include ':app'
+include ':lintrules'
