@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CustomLintRules</string>
+    <string name="lorem_ipsum">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit…"</string>
 </resources>

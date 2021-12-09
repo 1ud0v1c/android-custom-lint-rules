@@ -27,6 +27,19 @@ class FragmentContent: Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+    }
+
+    private fun initViews(): Unit = with(binding) {
+        recyclerView.adapter = ItemAdapter(listOf(
+            R.drawable.ic_android to getString(R.string.lorem_ipsum),
+            R.drawable.ic_android to getString(R.string.lorem_ipsum),
+            R.drawable.ic_android to getString(R.string.lorem_ipsum),
+        ))
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
