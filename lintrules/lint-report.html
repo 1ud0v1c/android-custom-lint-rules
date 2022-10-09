@@ -174,10 +174,10 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 2 errors and 4 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 1 error and 4 warnings</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-Check performed at Sun Nov 21 23:34:51 CET 2021      </nav>
+Check performed at Sat Jan 15 18:13:56 CET 2022      </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -185,7 +185,7 @@ Check performed at Sun Nov 21 23:34:51 CET 2021      </nav>
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="#overview"><i class="material-icons">dashboard</i>Overview</a>
       <a class="mdl-navigation__link" href="#LintImplTextFormat"><i class="material-icons warning-icon">warning</i>Lint Text Format (4)</a>
-      <a class="mdl-navigation__link" href="#LintImplTrimIndent"><i class="material-icons error-icon">error</i>Calling <code>.trimIndent</code> on Lint Strings (2)</a>
+      <a class="mdl-navigation__link" href="#LintImplTrimIndent"><i class="material-icons error-icon">error</i>Calling <code>.trimIndent</code> on Lint Strings (1)</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -204,7 +204,7 @@ Check performed at Sun Nov 21 23:34:51 CET 2021      </nav>
 <td class="countColumn">4</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#LintImplTextFormat">LintImplTextFormat</a>: Lint Text Format</td></tr>
 <tr>
-<td class="countColumn">2</td><td class="issueColumn"><i class="material-icons error-icon">error</i>
+<td class="countColumn">1</td><td class="issueColumn"><i class="material-icons error-icon">error</i>
 <a href="#LintImplTrimIndent">LintImplTrimIndent</a>: Calling <code>.trimIndent</code> on Lint Strings</td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (37)</a>
 </td></tr></table>
@@ -224,44 +224,44 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/AndroidLogDetector.kt">src/main/java/com/ludovic/vimont/lintrules/AndroidLogDetector.kt</a>:48</span>: <span class="message">"AmazingLog" looks like a code reference; surround with backtics in string to display as symbol, e.g. `AmazingLog`</span><br /><pre class="errorlines">
-<span class="lineno"> 45 </span>      briefDescription = <span class="string">"The android Log should not be used"</span>,
-<span class="lineno"> 46 </span>      explanation = <span class="string">"""
-</span><span class="lineno"> 47 </span><span class="string">      For amazing showcasing purposes we should not use the Android Log. We should the
-</span><span class="caretline"><span class="lineno"> 48 </span><span class="string">      </span><span class="warning"><span class="string">AmazingLog</span></span><span class="string"> instead.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="string">
-</span><span class="lineno"> 49 </span><span class="string">  """</span>.trimIndent(),
-<span class="lineno"> 50 </span>      category = Category.CORRECTNESS,
-<span class="lineno"> 51 </span>      priority = <span class="number">9</span>,
-</pre>
-
-<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:23</span>: <span class="message">"MemoryLeaks" looks like a code reference; surround with backtics in string to display as symbol, e.g. `MemoryLeaks`</span><br /><pre class="errorlines">
-<span class="lineno"> 20 </span>                issue = ISSUE,
-<span class="lineno"> 21 </span>                scope = node,
-<span class="lineno"> 22 </span>                location = context.getLocation(node),
-<span class="caretline"><span class="lineno"> 23 </span>                message = <span class="string">"Be careful about </span><span class="warning"><span class="string">MemoryLeaks</span></span><span class="string"> using ViewBinding."</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 24 </span>            )
-<span class="lineno"> 25 </span>        }
-<span class="lineno"> 26 </span>    }
-</pre>
-
-<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:23</span>: <span class="message">Single sentence error messages should not end with a period</span><br /><pre class="errorlines">
-<span class="lineno"> 20 </span>                issue = ISSUE,
-<span class="lineno"> 21 </span>                scope = node,
-<span class="lineno"> 22 </span>                location = context.getLocation(node),
-<span class="caretline"><span class="lineno"> 23 </span>                message = <span class="string">"</span><span class="warning"><span class="string">Be careful about MemoryLeaks using ViewBinding.</span></span><span class="string">"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 24 </span>            )
-<span class="lineno"> 25 </span>        }
-<span class="lineno"> 26 </span>    }
-</pre>
+<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:36</span>: <span class="message">The issue summary should be shorter; typically just a 3-6 words; it's used as a topic header in HTML reports and in the IDE inspections window</span><br /><pre class="errorlines">
+<span class="lineno">  33 </span>
+<span class="lineno">  34 </span>  <span class="keyword">val</span> ISSUE: Issue = Issue.create(
+<span class="lineno">  35 </span>      id = <span class="string">"ViewBindingLeaksDetector"</span>,
+<span class="caretline"><span class="lineno">  36 </span>      briefDescription = <span class="string">"</span><span class="warning"><span class="string">Be careful about MemoryLeaks using ViewBinding inside a Fragment</span></span><span class="string">"</span>,&nbsp;&nbsp;</span>
+<span class="lineno">  37 </span>      explanation = <span class="string">"""
+</span><span class="lineno">  38 </span><span class="string">          You should be careful about Memory Leaks using ViewBinding inside Fragments.
+</span><span class="lineno">  39 </span><span class="string">          Override the onDestroyView method and set your binding instance to null inside it.
+</span></pre>
 
 <span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:38</span>: <span class="message">"ViewBinding" looks like a code reference; surround with backtics in string to display as symbol, e.g. `ViewBinding`</span><br /><pre class="errorlines">
-<span class="lineno"> 35 </span>      id = <span class="string">"ViewBindingLeaksDetector"</span>,
-<span class="lineno"> 36 </span>      briefDescription = <span class="string">"Be careful about MemoryLeaks using ViewBindings"</span>,
-<span class="lineno"> 37 </span>      explanation = <span class="string">"""
-</span><span class="caretline"><span class="lineno"> 38 </span><span class="string">      You should be careful about Memory Leaks using </span><span class="warning"><span class="string">ViewBinding</span></span><span class="string"> inside Fragments.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="string">
-</span><span class="lineno"> 39 </span><span class="string">      Override the onDestroyView method and set your binding instance to null inside it.
-</span><span class="lineno"> 40 </span><span class="string">  """</span>.trimIndent(),
-<span class="lineno"> 41 </span>      category = Category.CORRECTNESS,
+<span class="lineno">  35 </span>  id = <span class="string">"ViewBindingLeaksDetector"</span>,
+<span class="lineno">  36 </span>  briefDescription = <span class="string">"Be careful about MemoryLeaks using ViewBinding inside a Fragment"</span>,
+<span class="lineno">  37 </span>  explanation = <span class="string">"""
+</span><span class="caretline"><span class="lineno">  38 </span><span class="string">      You should be careful about Memory Leaks using </span><span class="warning"><span class="string">ViewBinding</span></span><span class="string"> inside Fragments.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="string">
+</span><span class="lineno">  39 </span><span class="string">      Override the onDestroyView method and set your binding instance to null inside it.
+</span><span class="lineno">  40 </span><span class="string">  """</span>.trimIndent(),
+<span class="lineno">  41 </span>  category = Category.CUSTOM_LINT_CHECKS,
+</pre>
+
+<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:120</span>: <span class="message">"MemoryLeaks" looks like a code reference; surround with backtics in string to display as symbol, e.g. `MemoryLeaks`</span><br /><pre class="errorlines">
+<span class="lineno"> 117 </span>            issue = ISSUE,
+<span class="lineno"> 118 </span>            scopeClass = declaration,
+<span class="lineno"> 119 </span>            location = location,
+<span class="caretline"><span class="lineno"> 120 </span>            message = <span class="warning">message</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 121 </span>            quickfixData = lintFix,
+<span class="lineno"> 122 </span>        )
+<span class="lineno"> 123 </span>    }
+</pre>
+
+<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:120</span>: <span class="message">Single sentence error messages should not end with a period</span><br /><pre class="errorlines">
+<span class="lineno"> 117 </span>            issue = ISSUE,
+<span class="lineno"> 118 </span>            scopeClass = declaration,
+<span class="lineno"> 119 </span>            location = location,
+<span class="caretline"><span class="lineno"> 120 </span>            message = <span class="warning">message</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 121 </span>            quickfixData = lintFix,
+<span class="lineno"> 122 </span>        )
+<span class="lineno"> 123 </span>    }
 </pre>
 
 </div>
@@ -304,24 +304,14 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/AndroidLogDetector.kt">src/main/java/com/ludovic/vimont/lintrules/AndroidLogDetector.kt</a>:49</span>: <span class="message">No need to call <code>.trimIndent()</code> in issue registration strings; they are already trimmed by indent by lint when displaying to users</span><br /><pre class="errorlines">
-<span class="lineno"> 46 </span>      explanation = <span class="string">"""
-</span><span class="lineno"> 47 </span><span class="string">      For amazing showcasing purposes we should not use the Android Log. We should the
-</span><span class="lineno"> 48 </span><span class="string">      AmazingLog instead.
-</span><span class="caretline"><span class="lineno"> 49 </span><span class="string">  """</span>.<span class="error">trimIndent()</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 50 </span>      category = Category.CORRECTNESS,
-<span class="lineno"> 51 </span>      priority = <span class="number">9</span>,
-<span class="lineno"> 52 </span>      severity = Severity.WARNING,
-</pre>
-
 <span class="location"><a href="../../src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt">src/main/java/com/ludovic/vimont/lintrules/ViewBindingLeaksDetector.kt</a>:40</span>: <span class="message">No need to call <code>.trimIndent()</code> in issue registration strings; they are already trimmed by indent by lint when displaying to users</span><br /><pre class="errorlines">
-<span class="lineno"> 37 </span>      explanation = <span class="string">"""
-</span><span class="lineno"> 38 </span><span class="string">      You should be careful about Memory Leaks using ViewBinding inside Fragments.
-</span><span class="lineno"> 39 </span><span class="string">      Override the onDestroyView method and set your binding instance to null inside it.
-</span><span class="caretline"><span class="lineno"> 40 </span><span class="string">  """</span>.<span class="error">trimIndent()</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 41 </span>      category = Category.CORRECTNESS,
-<span class="lineno"> 42 </span>      priority = <span class="number">9</span>,
-<span class="lineno"> 43 </span>      severity = Severity.WARNING,
+<span class="lineno">  37 </span>  explanation = <span class="string">"""
+</span><span class="lineno">  38 </span><span class="string">      You should be careful about Memory Leaks using ViewBinding inside Fragments.
+</span><span class="lineno">  39 </span><span class="string">      Override the onDestroyView method and set your binding instance to null inside it.
+</span><span class="caretline"><span class="lineno">  40 </span><span class="string">  """</span>.<span class="error">trimIndent()</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  41 </span>  category = Category.CUSTOM_LINT_CHECKS,
+<span class="lineno">  42 </span>  priority = <span class="number">9</span>,
+<span class="lineno">  43 </span>  severity = Severity.WARNING,
 </pre>
 
 </div>

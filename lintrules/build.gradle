@@ -1,38 +1,19 @@
 plugins {
     id 'java-library'
     id 'kotlin'
-    id 'com.android.lint'
 }
 
-lintOptions {
-    htmlReport true
-    htmlOutput file("lint-report.html")
-    textReport true
-    absolutePaths false
-    ignoreTestSources true
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+ext {
+    lintVersion = "30.0.3"
 }
 
 dependencies {
-    compileOnly "com.android.tools.lint:lint-api:30.0.3"
-    compileOnly "com.android.tools.lint:lint-checks:30.0.3"
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:1.6.0"
+    compileOnly "com.android.tools.lint:lint-api:$lintVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
 
-    testImplementation "com.android.tools.lint:lint:30.0.3"
-    testImplementation "org.jetbrains.kotlin:kotlin-reflect:1.6.0"
-    testImplementation "com.android.tools.lint:lint-tests:30.0.3"
+    testImplementation "com.android.tools.lint:lint:$lintVersion"
+    testImplementation "com.android.tools.lint:lint-tests:$lintVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.assertj:assertj-core:3.9.0"
-}
-
-tasks {
-    jar {
-        manifest {
-            attributes("Lint-Registry-v2": "com.ludovic.vimont.lintrules.IssueRegistry")
-        }
-    }
 }

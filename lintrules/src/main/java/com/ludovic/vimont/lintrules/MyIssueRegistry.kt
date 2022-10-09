@@ -6,7 +6,7 @@ import com.android.tools.lint.detector.api.Issue
 import com.google.common.annotations.Beta
 
 @Beta
-class IssueRegistry : IssueRegistry() {
+class MyIssueRegistry : IssueRegistry() {
 
     override val api: Int = CURRENT_API
 
