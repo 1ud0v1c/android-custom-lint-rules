@@ -12,6 +12,6 @@ class MyIssueRegistry : IssueRegistry() {
 
     override val issues: List<Issue>
         get() = listOf(
-            ViewBindingLeaksDetector.ISSUE,
+            VIEW_BINDING_ISSUE,
         )
 }

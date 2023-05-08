@@ -34,7 +34,7 @@ class ViewBindingLeaksDetectorTest {
 
         // When
         val testLintResult = lint().files(fragmentStub, viewBindingStub, myBindingStub, kotlin(fileContent).indented())
-            .issues(ViewBindingLeaksDetector.ISSUE)
+            .issues(VIEW_BINDING_ISSUE)
             .allowCompilationErrors()
             .run()
 
@@ -49,7 +49,7 @@ class ViewBindingLeaksDetectorTest {
 
         // When
         val testLintResult = lint().files(fragmentStub, viewBindingStub, myBindingStub, kotlin(fileContent).indented())
-            .issues(ViewBindingLeaksDetector.ISSUE)
+            .issues(VIEW_BINDING_ISSUE)
             .allowCompilationErrors()
             .run()
 
